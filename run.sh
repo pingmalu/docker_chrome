@@ -16,5 +16,6 @@ set -e
 # sed -i "s/kibana:5601/$HOSTNAME:5601/g" /etc/nginx/sites-enabled/kibana
 #/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 #
+rm /tmp/.X1* -rf
 sed -i "s/HERE\/chrome\"\  \"\$\@\".*/&\ --user-data-dir\ \$HOME/g" /opt/google/chrome/google-chrome
 exec /usr/bin/supervisord -n
