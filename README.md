@@ -1,31 +1,22 @@
-## Chrome Dockerfile
+# docker_lamp
+lamp 持久化环境
 
 启动示例：
 
-	docker run -p 999:5901 xxxxxx
+	docker run -p 771:22 -p 772:80 -p 773:3306 -e ROOT_PASS=pass -e MYSQL_PASS=pass -v /root/app/:/app -d xxxx
 
+Elasticsearch:
 
-This repository contains **Dockerfile** of [Chrome](https://www.google.com/chrome/browser/) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/dockerfile/chrome/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
+	vim /app/mybash/firstrun.sh
 
+	#!/bin/bash
+	#MYENV=E1
+	if [ "${MYENV}" != "**None**" ]; then
+	  basepath=$(cd `dirname $0`; pwd)
+	  cd $basepath/$MYENV
+	  pwd
+	  ./run.sh
+	fi
 
-### Base Docker Image
-
-* [dockerfile/ubuntu-desktop](http://dockerfile.github.io/#/ubuntu-desktop)
-
-
-### Installation
-
-1. Install [Docker](https://www.docker.com/).
-
-2. Download [automated build](https://registry.hub.docker.com/u/dockerfile/chrome/) from public [Docker Hub Registry](https://registry.hub.docker.com/): `docker pull dockerfile/chrome`
-
-   (alternatively, you can build an image from Dockerfile: `docker build -t="dockerfile/chrome" github.com/dockerfile/chrome`)
-
-
-### Usage
-
-    docker run -it --rm -p 5901:5901 dockerfile/chrome
-
-    USER=root vncserver :1 -geometry 1280x800 -depth 24
-
-Connect to `vnc://<host>:5901` via VNC client.
+	mkdir $MYENV
+	touch $MYENV/run.sh
