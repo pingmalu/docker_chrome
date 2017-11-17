@@ -27,7 +27,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 # Install LXDE and VNC server.
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y lxde-core lxterminal tightvncserver
 # Install Chromium.
-RUN apt-get install -y google-chrome-stable xdotool
+RUN apt-get install -y google-chrome-stable xdotool python-pip
 
 RUN mv /root/.vnc/fzzy.ttf /usr/share/fonts/fzzy.ttf && \
     fc-cache && \
@@ -159,6 +159,9 @@ RUN mkdir -p /app/www && rm -fr /var/www/html && ln -s /app/www /var/www/html
 #RUN pip3 install scapy-python3
 ################ [Install scapy] ################
 
+################ [Install selenium] ################
+RUN pip install selenium
+################ [Install selenium] ################
 
 #webssh:gateone集成进apache反向代理
 #RUN pip install tornado==2.4 && \
